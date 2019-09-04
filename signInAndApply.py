@@ -71,25 +71,24 @@ try:
   pressNext()
 
   #wait for the RESUME page
-  uploadResumeField = waitForElement(driver, 10, By.XPATH, '//*[@id="uploadRadio"]')
+  useSavedResume = waitForElement(driver, 10, By.XPATH, '//*[@id="repositoryRadio"]')
+  useSavedResume.click()
 
-  #upload resume
-  uploadResumeField.click()
-
-  uploadCVField = driver.find_element_by_id('uploadRadioSelectedFile')
-
-  cvPath = "Andjela_Pajic_CV.pdf";
-  driver.execute_script("arguments[0].innerHTML = '" + cvPath + "'", uploadCVField)
-
-  #check radio button for uploading cover letter
-  driver.find_element_by_xpath('//*[@id="uploadCLRadio"]').click()
-  coverLetterPath = "Andjela_Pajic_cover_letter.pdf";
-  #upload cover letter
-  uploadCoverLetterField = driver.find_element_by_id('uploadCLRadioSelectedFile')
-  driver.execute_script("arguments[0].innerHTML = '" + coverLetterPath + "'", uploadCoverLetterField)
+  useSavedCoverLetter = driver.find_element_by_xpath('//*[@id="repositoryCLRadio"]')
+  useSavedCoverLetter.click()
 
   #wait for the next page and click next
   pressNext()
+
+  #wait for the next page and click next
+  pressNext()
+
+  #wait for the next page and click next
+  pressNext()
+
+  luckyButton = waitForElement(driver, 10, By.XPATH, '//*[@id="finishButton"]')
+  # submit application
+  luckyButton.click()
 
 except Exception as e:
   print('Something goes wrong')
